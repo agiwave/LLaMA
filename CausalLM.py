@@ -143,10 +143,7 @@ def CausalLM(args):
             y = np.einsum('bld,nd->bln', x, self.embedding.weight)
         if(targets is not None):
             loss = np.cross_entropy(y.view(-1, y.size(-1)), t.reshape(-1), ignore_index=-1)
-            vocab_max = np.max(self.embedding.weight, dim=1)[0]-1.
-            vocab_min = np.min(self.embedding.weight, dim=1)[0]
-            vocab_loss = np.mean(vocab_max)+np.mean(vocab_min)
-            return y, loss + vocab_loss
+            return y, loss
         else:
             return y
 
