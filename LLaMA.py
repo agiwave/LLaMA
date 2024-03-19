@@ -62,9 +62,9 @@ def LLaMA(name):
                     wv = f.get_tensor(f'backbone.layers.{i}.attention.wv.weight')
                     copy(llama.layers[i*2].layer.c_attn.weight, np.cat((wq,wk,wv), dim=1))
                     copy(llama.layers[i*2+1].ffn_norm.weight, f.get_tensor(f'backbone.layers.{i}.ffn_norm.weight'))
-                    copy(gemma.layers[i*2+1].layer.gate_proj.weight, state[f'model.layers.{i}.feed_forward.w1.weight'])
-                    copy(gemma.layers[i*2+1].layer.up_proj.weight, state[f'model.layers.{i}.feed_forward.w3.weight'])
-                    copy(gemma.layers[i*2+1].layer.down_proj.weight, state[f'model.layers.{i}.feed_forward.w2.weight'])
+                    copy(llama.layers[i*2+1].layer.gate_proj.weight, state[f'model.layers.{i}.feed_forward.w1.weight'])
+                    copy(llama.layers[i*2+1].layer.up_proj.weight, state[f'model.layers.{i}.feed_forward.w3.weight'])
+                    copy(llama.layers[i*2+1].layer.down_proj.weight, state[f'model.layers.{i}.feed_forward.w2.weight'])
     return llama
 
 if __name__ == "__main__":
