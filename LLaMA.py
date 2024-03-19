@@ -68,6 +68,6 @@ def LLaMA(name):
     return llama
 
 if __name__ == "__main__":
-    mamba = Mamba('data/Llama-2-7b-chat-hf')
+    lla = LLaMA('data/Llama-2-7b-chat-hf')
     print('Model loaded')
-    print(mamba.generate("Mamba is"))
+    print(lla.generate("Mamba is"))
